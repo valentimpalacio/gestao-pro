@@ -1,0 +1,37 @@
+{
+  "name": "gestao-pro",
+  "version": "1.0.0",
+  "description": "Sistema completo de gestão para pequenos negócios",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "setup": "cd backend && npm run setup",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npx eslint .",
+    "lint:frontend": "cd frontend && npx eslint .",
+    "format": "npm run format:backend && npm run format:frontend",
+    "format:backend": "cd backend && npx prettier --write .",
+    "format:frontend": "cd frontend && npx prettier --write .",
+    "prepare": "husky",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  },
+  "lint-staged": {
+    "backend/**/*.js": ["cd backend && npx eslint --fix", "cd backend && npx prettier --write"],
+    "frontend/**/*.{js,jsx}": ["cd frontend && npx eslint --fix", "cd frontend && npx prettier --write"]
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
