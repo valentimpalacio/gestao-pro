@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 
 dotenv.config();
 
-const setupDatabase = async () => {
+export const setupDatabase = async () => {
   try {
     const connection = await mysql.createConnection({
       host: process.env.DB_HOST || 'localhost',
@@ -200,13 +200,15 @@ const setupDatabase = async () => {
 
     console.log('✅ Banco de dados configurado com sucesso!');
     console.log('👤 Usuário padrão: admin@gestao.com / admin123');
-    
+
     await connection.end();
-    process.exit(0);
   } catch (error) {
     console.error('❌ Erro ao configurar banco de dados:', error);
-    process.exit(1);
+    throw error;
   }
 };
 
-setupDatabase();
+// Allow running standalone via: node scripts/setupDatabase.js
+if (process.argv[1] && process.argv[1].includes('setupDatabase')) {
+  setupDatabase().then(() => process.exit(0)).catch(() => process.exit(1));
+}

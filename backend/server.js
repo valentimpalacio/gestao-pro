@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpecs from './config/swagger.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
+import { setupDatabase } from './scripts/setupDatabase.js';
 
 // Routes
 import authRoutes from './routes/auth.js';
@@ -64,11 +65,17 @@ app.use(notFound);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor rodando na porta ${PORT}`);
-    console.log(`📊 API disponível em http://localhost:${PORT}/api`);
-    console.log(`📚 Documentação em http://localhost:${PORT}/api-docs`);
-    console.log(`🔧 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+  // Auto-setup database on startup (for Railway/cloud deployments)
+  setupDatabase().then(() => {
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor rodando na porta ${PORT}`);
+      console.log(`📊 API disponível em http://localhost:${PORT}/api`);
+      console.log(`📚 Documentação em http://localhost:${PORT}/api-docs`);
+      console.log(`🔧 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+    });
+  }).catch((error) => {
+    console.error('❌ Falha ao configurar banco de dados:', error);
+    process.exit(1);
   });
 }
 
