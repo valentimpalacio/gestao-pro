@@ -2,6 +2,7 @@
   <h1>📊 Gestão Pro</h1>
   <p><strong>Sistema Completo de Gestão para Pequenos Negócios</strong></p>
   <p>
+    <a href="https://gestao-pro-app.vercel.app"><strong>🌐 Demo ao vivo</strong></a> •
     <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" alt="React" />
     <img src="https://img.shields.io/badge/Node.js-20-339933?logo=nodedotjs&logoColor=white" alt="Node.js" />
     <img src="https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql&logoColor=white" alt="MySQL" />
@@ -354,6 +355,8 @@ docker-compose up -d
 # Access: http://localhost:5173
 ```
 
+🌐 **Live Demo:** https://gestao-pro-app.vercel.app
+
 See full documentation in [Portuguese](#-gestão-pro) above.
 
 ---
@@ -381,5 +384,7 @@ Sistema completo de gestión empresarial con panel de control moderno, página d
 docker-compose up -d
 # Acceso: http://localhost:5173
 ```
+
+🌐 **Demo en vivo:** https://gestao-pro-app.vercel.app
 
 Ver documentación completa en [Portugués](#-gestão-pro) arriba.
