@@ -7,15 +7,15 @@ dotenv.config();
 export const setupDatabase = async () => {
   try {
     const connection = await mysql.createConnection({
-      host: process.env.DB_HOST || 'localhost',
-      user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || '',
-      port: parseInt(process.env.DB_PORT || '3306')
+      host: process.env.DB_HOST || process.env.MYSQLHOST || 'localhost',
+      user: process.env.DB_USER || process.env.MYSQLUSER || 'root',
+      password: process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || '',
+      port: parseInt(process.env.DB_PORT || process.env.MYSQLPORT || '3306')
     });
 
     console.log('🔧 Criando banco de dados...');
-    await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || 'gestao_negocios'} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
-    await connection.query(`USE ${process.env.DB_NAME || 'gestao_negocios'}`);
+    await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || process.env.MYSQLDATABASE || 'gestao_negocios'} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
+    await connection.query(`USE ${process.env.DB_NAME || process.env.MYSQLDATABASE || 'gestao_negocios'}`);
 
     console.log('🔧 Criando tabelas...');
 
